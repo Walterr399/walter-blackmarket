@@ -1,5 +1,7 @@
 ESX = exports["es_extended"]:getSharedObject()
 
+local Shared = require("shared.shared")
+
 RegisterNetEvent("walter-blackmarket:server:purchase", function(itemName, price)
     local src = source
     local xPlayer = ESX.GetPlayerFromId(src)
@@ -8,23 +10,18 @@ RegisterNetEvent("walter-blackmarket:server:purchase", function(itemName, price)
         return
     end
 
-    local itemData
+    local data
     for _, category in pairs(Shared.Config.BlackmarketItems) do
         for _, item in ipairs(category) do
             if item.name == itemName then
-                itemData = item
+                data = item
                 break
             end
         end
-        if itemData then break end
+        if data then break end
     end
 
-    if not itemData then
-        vx.print.error("Item not found in config: " .. tostring(itemName))
-        return
-    end
-
-    local amount = itemData.amount or 1
+    local amount = data.amount or 1
 
     if xPlayer.getAccount("bank").money >= price then
         xPlayer.removeAccountMoney("bank", price)
@@ -32,7 +29,7 @@ RegisterNetEvent("walter-blackmarket:server:purchase", function(itemName, price)
 
         vx.notify(src, {
             title = "Blackmarket",
-            message = ("Je hebt %sx %s gekocht voor €%s"):format(amount, itemData.title, price),
+            message = ("Je hebt %sx %s gekocht voor €%s"):format(amount, data.title, price),
             type = "success"
         })
     else
@@ -42,4 +39,8 @@ RegisterNetEvent("walter-blackmarket:server:purchase", function(itemName, price)
             type = "error"
         })
     end
+end)
+
+vx.callback.register("walter-blackmarket:server:receive:config", function'()
+    return Shared
 end)

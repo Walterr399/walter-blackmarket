@@ -1,3 +1,5 @@
+local Shared = vx.callback.await("walter-blackmarket:server:receive:config")
+
 local point = lib.points.new({
     coords = Shared.Location,
     distance = 2.5,
@@ -22,6 +24,7 @@ end
 function openBlackmarket()
     lib.registerContext({
         id = 'blackmarket_menu',
+        menu = "shop_menu",
         title = 'Blackmarket',
         options = {
             {
@@ -54,11 +57,7 @@ function openBlackmarket()
 end
 
 function openShop(type)
-    local items = Config.BlackmarketItems[type]
-    if not items then
-        print("Invalid shop type: " .. tostring(type))
-        return
-    end
+    local items = Shared.Config,
 
     local options = {}
     for _, item in ipairs(items) do
@@ -72,8 +71,8 @@ function openShop(type)
     end
 
     lib.registerContext({
+        title = "Wapendealer",
         id = 'shop_menu',
-        title = type:sub(1, 1):upper() .. type:sub(2) .. " Shop",
         options = options
     })
 
