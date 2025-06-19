@@ -24,7 +24,6 @@ end
 function openBlackmarket()
     lib.registerContext({
         id = 'blackmarket_menu',
-        menu = "shop_menu",
         title = 'Blackmarket',
         options = {
             {
@@ -56,10 +55,10 @@ function openBlackmarket()
     lib.showContext("blackmarket_menu")
 end
 
-function openShop(type)
-    local items = Shared.Config,
-
+function openShop(category)
+    local items = Shared.Config[category]
     local options = {}
+
     for _, item in ipairs(items) do
         table.insert(options, {
             title = item.title .. " - €" .. item.price,
@@ -71,8 +70,8 @@ function openShop(type)
     end
 
     lib.registerContext({
-        title = "Wapendealer",
         id = 'shop_menu',
+        title = "Wapendealer",
         options = options
     })
 

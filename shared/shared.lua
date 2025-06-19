@@ -1,6 +1,6 @@
 Shared = {}
 
-Shared.Location = vector3() --# Add coords in here
+Shared.Location = vector3(0.0, 0.0, 0.0) --# Replace with actual coords
 
 Shared.Config = {
     weapons = {
@@ -9,7 +9,7 @@ Shared.Config = {
         { title = "Knife", name = "weapon_knife", price = 500, icon = "knife" }
     },
     ammo = {
-        { title = "Pistol Ammo", name = "pistol_ammo", price = 200, icon = "box", amount = 25 }, --# If you want to add an amount to them item, you can do it like this.
+        { title = "Pistol Ammo", name = "pistol_ammo", price = 200, icon = "box", amount = 25 },
         { title = "SMG Ammo", name = "smg_ammo", price = 300, icon = "box", amount = 30 }
     },
     drugs = {
@@ -18,3 +18,7 @@ Shared.Config = {
         { title = "Meth", name = "meth_bag", price = 600, icon = "flask" }
     }
 }
+
+Shared.Debug = false
+
+return Shared
