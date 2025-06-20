@@ -16,8 +16,7 @@ dependencies {
 shared_scripts {
     "@ox_lib/init.lua",
     "@vx_lib/init.lua",
-    "@es_extended/imports.lua",
-    "shared/*.lua"
+    "@es_extended/imports.lua"
 }
 
 client_scripts {
@@ -25,5 +24,6 @@ client_scripts {
 }
 
 server_scripts {
-    "server/*.lua"
+    "server/*.lua",
+    "shared.lua"
 }

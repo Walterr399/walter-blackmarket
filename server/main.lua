@@ -8,7 +8,7 @@ if Shared.Debug then
 end
 
 -- [[ IMPORTS ]] --
-local Shared = require("shared.shared")
+local Shared = require("shared")
 
 -- [[ EVENTS ]] --
 RegisterNetEvent("walter-blackmarket:server:purchase", function(itemName, price)
