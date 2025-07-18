@@ -21,6 +21,16 @@ function point:nearby()
     end
 end
 
+function formatPrice(price)
+    local formatted = tostring(price)
+    local k
+    while true do  
+        formatted, k = formatted:gsub("^(-?%d+)(%d%d%d)", '%1.%2')
+        if k == 0 then break end
+    end
+    return formatted
+end
+
 function openBlackmarket()
     lib.registerContext({
         id = 'blackmarket_menu',
@@ -61,7 +71,7 @@ function openShop(category)
 
     for _, item in ipairs(items) do
         table.insert(options, {
-            title = item.title .. " - €" .. item.price,
+            title = item.title .. " - €" .. formatPrice(item.price),
             icon = item.icon,
             onSelect = function()
                 vx.TriggerServerEvent("walter-blackmarket:server:purchase", item.name, item.price)
